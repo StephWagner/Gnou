@@ -1,17 +1,19 @@
 package com.objis.demojdbc;
 
 import java.sql.Connection;
+import fiche.de.competences.Affichage;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 
 public class DemoJdbc {
 
-	public static void main(String[] args) {
-		sauverEnBase();
-
-	}
+	public static void main(String[] args) throws ParseException {
+		String[] fiche = Affichage.lireFiche(9644,"Echanger", "2016-11-25 00:00:00");
+		System.out.println("Note " + fiche[0] + " Commentaire " + fiche[1]);
+		}
 
 	public static void sauverEnBase() {
 		String DBURL = "jdbc:mysql://localhost/gnou?autoReconnect=true&useSSL=false";
