@@ -1,4 +1,4 @@
-package fiche.de.competences;
+package fiche_competence;
 
 import java.sql.Connection;
 import java.sql.Date;

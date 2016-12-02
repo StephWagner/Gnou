@@ -1,18 +1,23 @@
 package com.objis.demojdbc;
 
 import java.sql.Connection;
-import fiche.de.competences.Affichage;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 
+import connexion.Authentification;
+import fiche_competence.Affichage;
+
 public class DemoJdbc {
 
 	public static void main(String[] args) throws ParseException {
-		String[] fiche = Affichage.lireFiche(9644,"Echanger", "2016-11-25 00:00:00");
-		System.out.println("Note " + fiche[0] + " Commentaire " + fiche[1]);
+		String[] fiche = Affichage.lireFiche(9644, "Echanger", "2016-11-25" );
+		System.out.println(fiche[0]);
+		System.out.println(fiche[1]);
+		System.out.println(fiche[2]);
+		System.out.println(fiche[3]);
 		}
 
 	public static void sauverEnBase() {

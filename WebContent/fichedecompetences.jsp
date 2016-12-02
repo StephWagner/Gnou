@@ -1,3 +1,4 @@
+<%@page import="fiche_competence.Affichage" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,12 @@
 </head>
 <body>
 <div class="container">
+<jsp:useBean id="person" type="connexion.Person" scope="request"/>
+<p><% Affichage a= new Affichage();
+int code_isep = person.getCode_isep();
+out.println(code_isep);
+%> 
+</p>
 	<table class=table-bordered>
   <h3 class= text-center>1- Agir en bon communicant dans un environnement scientifique et technologique</h3>
   <tr>
@@ -22,11 +29,12 @@
     <th>Commentaire tuteur</th>
   </tr>
   <tr>
-    <td rowspan=6> Échanger </br>
+  	<%! String competence= "Échanger"; %>
+    <td rowspan=6> <%= competence %> </br>
     				Écouter et se faire écouter</br></br>
     				Dialoguer, argumenter, convaincre</td>
     <td rowspan=6> Commentaire groupe </td>
-    <td> Commentaire étudiant 1</td>
+    <td><%=  %> </td>
     <td class= text-center>1</td><td class= text-center>2</td><td class= text-center>3</td><td class= text-center>4</td><td class= text-center>5</td>
     <td rowspan=6 class= text-center> 1 </td>
     <td>Kevin</td>

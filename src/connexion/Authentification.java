@@ -2,10 +2,10 @@ package connexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 
 public class Authentification {
 
@@ -18,19 +18,19 @@ public class Authentification {
 		Statement st=null;
 		ResultSet rs=null;
 		
-		boolean verif = false;
+		boolean verif = true;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			cn = DriverManager.getConnection(DBURL, DBLOGIN, DBPASSWORD);
 			st = cn.createStatement();
-			String sql= "SELECT Mdp FROM profil WHERE Login=login";
-			
-			rs= st.executeQuery(sql);
+			PreparedStatement preparedStatement	= cn.prepareStatement("SELECT Mdp FROM profil WHERE Login=? " );
+			preparedStatement.setString( 1, login );
+			rs = preparedStatement.executeQuery();
 			
 			while (rs.next()) {
-				if (rs.getString("Mdp") == mdp) { verif=true; }
+				if (mdp == rs.getString("Mdp")) { verif=true; }
 			}
 			
 		} catch (SQLException e) {
@@ -64,9 +64,11 @@ public class Authentification {
 
 			cn = DriverManager.getConnection(DBURL, DBLOGIN, DBPASSWORD);
 			st = cn.createStatement();
-			String sql= "SELECT Code_ISEP, Statut, Classe, Groupe FROM profil WHERE Login=login";
 			
-			rs= st.executeQuery(sql);
+			PreparedStatement preparedStatement	= cn.prepareStatement("SELECT Code_ISEP, Statut, Classe, Groupe FROM profil WHERE Login=? " );
+			preparedStatement.setString( 1, login );
+			
+			rs = preparedStatement.executeQuery();
 			
 			while (rs.next()) {
 				infos[0] = Integer.toString(rs.getInt("Code_ISEP"));
