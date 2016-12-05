@@ -57,7 +57,7 @@ public class Authentification {
 		Statement st=null;
 		ResultSet rs=null;
 		
-		String[] infos = new String[4];
+		String[] infos = new String[5];
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -65,7 +65,7 @@ public class Authentification {
 			cn = DriverManager.getConnection(DBURL, DBLOGIN, DBPASSWORD);
 			st = cn.createStatement();
 			
-			PreparedStatement preparedStatement	= cn.prepareStatement("SELECT Code_ISEP, Statut, Classe, Groupe FROM profil WHERE Login=? " );
+			PreparedStatement preparedStatement	= cn.prepareStatement("SELECT Code_ISEP, Prenom, Statut, Groupe FROM profil WHERE Login=? " );
 			preparedStatement.setString( 1, login );
 			
 			rs = preparedStatement.executeQuery();
@@ -73,8 +73,8 @@ public class Authentification {
 			while (rs.next()) {
 				infos[0] = Integer.toString(rs.getInt("Code_ISEP"));
 				infos[1] = rs.getString("Statut");
-		        infos[2] = rs.getString("Classe");
-		        infos[3] = rs.getString("Groupe");
+		        infos[2] = rs.getString("Groupe");
+		        infos[3] = rs.getString("Prenom");
 			}
 			
 		} catch (SQLException e) {

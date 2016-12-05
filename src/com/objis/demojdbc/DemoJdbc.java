@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import connexion.Authentification;
 import fiche_competence.Affichage;
@@ -13,11 +14,9 @@ import fiche_competence.Affichage;
 public class DemoJdbc {
 
 	public static void main(String[] args) throws ParseException {
-		String[] fiche = Affichage.lireFiche(9644, "Echanger", "2016-11-25" );
-		System.out.println(fiche[0]);
-		System.out.println(fiche[1]);
-		System.out.println(fiche[2]);
-		System.out.println(fiche[3]);
+		ArrayList<String> fiche = Affichage.lireFiche(9579, "Echanger", 1);
+		System.out.println(fiche);
+		
 		}
 
 	public static void sauverEnBase() {

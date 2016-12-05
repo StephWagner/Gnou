@@ -26,16 +26,6 @@ public class Connexion extends HttpServlet {
 			url = "/index.html";
 		}
 		else {
-			String login = (String) s.getAttribute("login");
-			String[] info = Authentification.recupInfos(login);
-			int code_isep = Integer.parseInt(info[0]);
-			String statut = info[1];
-			String classe = info[2];
-			int groupe = Integer.parseInt(info[3]);
-			
-			Person personBean = new Person(code_isep, statut, classe, groupe);
-			request.setAttribute("person",personBean);
-			
 			url = "/fichedecompetences.jsp";
 		}
 		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
@@ -54,13 +44,8 @@ public class Connexion extends HttpServlet {
 			HttpSession s=request.getSession(true);
 			s.setAttribute("login", login);
 			String[] info = Authentification.recupInfos(login);
-			int code_isep = Integer.parseInt(info[0]);
-			String statut = info[1];
-			String classe = info[2];
-			int groupe = Integer.parseInt(info[3]);
-			
-			Person personBean = new Person(code_isep, statut, classe, groupe);
-			request.setAttribute("person",personBean);
+			s.setAttribute("code_isep", Integer.parseInt(info[0]));
+			s.setAttribute("groupe", info[2]);
 			
 			url = "/fichedecompetences.jsp";
 		}	
