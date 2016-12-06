@@ -45,6 +45,7 @@ public class Connexion extends HttpServlet {
 			s.setAttribute("login", login);
 			String[] info = Authentification.recupInfos(login);
 			s.setAttribute("code_isep", Integer.parseInt(info[0]));
+			s.setAttribute("statut", info[1]);
 			s.setAttribute("groupe", info[2]);
 			
 			url = "/fichedecompetences.jsp";

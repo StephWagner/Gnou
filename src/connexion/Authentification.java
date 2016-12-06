@@ -18,7 +18,7 @@ public class Authentification {
 		Statement st=null;
 		ResultSet rs=null;
 		
-		boolean verif = true;
+		boolean verif = false;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -30,7 +30,7 @@ public class Authentification {
 			rs = preparedStatement.executeQuery();
 			
 			while (rs.next()) {
-				if (mdp == rs.getString("Mdp")) { verif=true; }
+				if (mdp.equals(rs.getString("Mdp"))) { verif=true; }
 			}
 			
 		} catch (SQLException e) {

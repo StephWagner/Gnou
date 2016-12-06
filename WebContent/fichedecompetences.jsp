@@ -18,7 +18,9 @@
 <div class="container">
 <p><% Affichage a= new Affichage();
 String groupe = (String)session.getAttribute("groupe");
+String statut = (String)session.getAttribute("statut");
 int[] membre = a.getMembre(groupe);
+
 %> 
 
 
@@ -35,9 +37,14 @@ int[] membre = a.getMembre(groupe);
     <th> Coef </th>
     <th>Observation sur l'équipe</th>
     <th>Observations individuelles</th>
-    <th colspan=5>Niveau individuel</th>
+    <th>Loin</th>
+    <th>Proche</th>
+    <th> Très proche </th>
+    <th> Attendu </th>
+    <th> Au delà </th>
     <th>Étudiants</th>
-    <th>Commentaire tuteur</th>
+    <% if (statut.equals("prof") || statut.equals("respo_app")) { %>
+    <th>Commentaire tuteur</th><% } %>
   </tr>
   <tr>
   	<%! String competence= "Echanger"; %>
@@ -57,9 +64,17 @@ int[] membre = a.getMembre(groupe);
   			ArrayList<String> fiche = a.lireFiche(membre[i], competence, 1);
   			String prenom = a.getPrenom(membre[i]);%>
     <td><% out.print(fiche.get(1)); %> </td>
-    <td class= text-center>1</td><td class= text-center>2</td><td class= text-center>3</td><td class= text-center>4</td><td class= text-center>5</td>
+    <% int note = Integer.parseInt(fiche.get(0));
+    for (int j=1; j<=5; j++) {
+    	if (note == j) {%>
+    		<td class= text-center>x</td><%
+    	}else {%>
+    		<td class= text-center></td><%
+    	}
+    }%>
     <td><% out.print(prenom); %></td>
-    <td><% out.print(fiche.get(2)); %></td>
+    <% if (statut.equals("respo_app")) {%>
+    <td><% out.print(fiche.get(2)); }%></td>
   </tr>
   <tr><% } %></tr>
 </table>
